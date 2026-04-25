@@ -41,6 +41,7 @@ paper4gdut/
 ### 3. 封面图片
 
 模板使用从 dotx 文档中提取的封面图片：
+
 - `images/cover_logo.png` - 校徽
 - `images/cover_banner.png` - 广东工业大学横幅
 
@@ -209,10 +210,12 @@ configure-fonts(
 本模板严格按照广东工业大学 dotx 模板格式规范实现：
 
 ### 页面设置
+
 - 纸张：A4
 - 页边距：上 30mm，下 25mm，左 30mm，右 20mm
 
 ### 正文字体
+
 - 中文字体：宋体
 - 英文字体：Times New Roman
 - 字号：小四（12pt）
@@ -220,12 +223,14 @@ configure-fonts(
 - 首行缩进：2 字符
 
 ### 标题样式
+
 - 一级标题：16pt，Arial + 黑体，加粗，居中，段前分页
 - 二级标题：16pt，Arial + 黑体，加粗
 - 三级标题：16pt，Arial + 黑体，加粗
 - 四级标题：14pt，Arial + 黑体，加粗
 
 ### 页眉页脚
+
 - 页眉：9pt，宋体，居中对齐，底部单线边框
 - 页脚：9pt，Times New Roman，右对齐页码
 
@@ -275,18 +280,23 @@ your-project/
 ## 常见问题
 
 **Q: 编译时报错找不到字体**
+
 A: 使用本地字体配置功能，指定系统中存在的字体文件路径。或者确保系统已安装 SimSun、SimHei、Times New Roman、Arial 等字体。
 
 **Q: 如何添加参考文献？**
+
 A: 结合 BibTeX 使用。Typst 支持 `.bib` 文件，通过 `#bibliography("bibliography.bib")` 引用。
 
 **Q: 如何调整行距？**
+
 A: 在 `template.typ` 中找到 `set par(leading: 1.5em, ...)`，修改 `leading` 值。
 
 **Q: 如何添加新的章节？**
+
 A: 在 `chapters/` 目录创建新文件（如 `6-future.typ`），然后在 `main.typ` 的模板函数块中添加 `#include "chapters/6-future.typ"`。
 
 **Q: 封面图片不显示怎么办？**
+
 A: 确保 `images/` 目录下存在 `cover_logo.png` 和 `cover_banner.png` 文件，或通过 `--input` 参数指定正确的图片路径。
 
 ## License
