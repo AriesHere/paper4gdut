@@ -127,94 +127,98 @@
 // 本科毕业设计（论文）
 #let thesis(metadata, show_cover: true, doc_body) = {
   common-settings[
-    set page(numbering: none)
+    #{
+      set page(numbering: none)
 
-    // 封面
-    if show_cover {
-      thesis-cover(
-        fonts: fonts,
-        title: metadata.title,
-        title_en: metadata.title_en,
-        author: metadata.author,
-        student_id: metadata.student_id,
-        advisor: metadata.advisor,
-        major: metadata.major,
-        school: metadata.school,
-        class_info: metadata.class_info,
-        date: metadata.date,
-      )
-    }
+      // 封面
+      if show_cover {
+        thesis-cover(
+          fonts: fonts,
+          title: metadata.title,
+          title_en: metadata.title_en,
+          author: metadata.author,
+          student_id: metadata.student_id,
+          advisor: metadata.advisor,
+          major: metadata.major,
+          school: metadata.school,
+          class_info: metadata.class_info,
+          date: metadata.date,
+        )
+      }
 
-    // 中文摘要
-    [
-      #align(center)[
-        #text(font: heiti, size: 15.75pt, weight: 400)[摘  要]
-      ]
-      #v(1em)
-      #metadata.abstract_cn
-      #v(1em)
-      #text(font: heiti, size: 14pt, weight: 400)[关键词：]
-      #metadata.keywords_cn.join("；")
-    ]
-
-    pagebreak()
-
-    // 英文摘要
-    if metadata.abstract_en != [] or metadata.keywords_en != () {
+      // 中文摘要
       [
         #align(center)[
-          #text(font: heiti, size: 15.75pt, weight: 400)[Abstract]
+          #text(font: heiti, size: 15.75pt, weight: 400)[摘  要]
         ]
         #v(1em)
-        #metadata.abstract_en
+        #metadata.abstract_cn
         #v(1em)
-        #text(font: heiti, size: 14pt, weight: 400)[Keywords: ]
-        #metadata.keywords_en.join("; ")
+        #text(font: heiti, size: 14pt, weight: 400)[关键词：]
+        #metadata.keywords_cn.join("；")
       ]
+
       pagebreak()
-    }
 
-    // 目录
-    [
-      #align(center)[
-        #text(font: heiti, size: 15.75pt, weight: 400)[目  录]
+      // 英文摘要
+      if metadata.abstract_en != [] or metadata.keywords_en != () {
+        [
+          #align(center)[
+            #text(font: heiti, size: 15.75pt, weight: 400)[Abstract]
+          ]
+          #v(1em)
+          #metadata.abstract_en
+          #v(1em)
+          #text(font: heiti, size: 14pt, weight: 400)[Keywords: ]
+          #metadata.keywords_en.join("; ")
+        ]
+        pagebreak()
+      }
+
+      // 目录
+      [
+        #align(center)[
+          #text(font: heiti, size: 15.75pt, weight: 400)[目  录]
+        ]
+        #v(1em)
+        #outline(title: none, indent: auto, depth: 3)
       ]
-      #v(1em)
-      #outline(title: none, indent: auto, depth: 3)
-    ]
 
-    pagebreak()
+      pagebreak()
 
-    // 正文
-    setup-header-footer(title: metadata.title, header_text: metadata.header_text)
+      // 正文
+      setup-header-footer(title: metadata.title, header_text: metadata.header_text)
 
-    doc_body
+      doc_body
+    }
   ]
 }
 
 // 程序设计课程设计报告
 #let course-report(metadata, body) = {
   common-settings[
-    set page(numbering: none)
+    #{
+      set page(numbering: none)
 
-    // 封面
-    course-report-cover(
-      fonts: fonts,
-      title: metadata.title,
-      author: metadata.author,
-      student_id: metadata.student_id,
-      advisor: metadata.advisor,
-      major: metadata.major,
-      school: metadata.school,
-      class_info: metadata.class_info,
-      grade: metadata.grade,
-      date: metadata.date,
-    )
+      // 封面
+      course-report-cover(
+        fonts: fonts,
+        title: metadata.title,
+        author: metadata.author,
+        student_id: metadata.student_id,
+        advisor: metadata.advisor,
+        major: metadata.major,
+        school: metadata.school,
+        class_info: metadata.class_info,
+        grade: metadata.grade,
+        date: metadata.date,
+      )
 
-    // 正文
-    setup-header-footer(title: metadata.title, header_text: metadata.header_text)
+      // 正文
+      setup-header-footer(title: metadata.title, header_text: metadata.header_text)
 
-    body
+      body
+    }
   ]
 }
 
