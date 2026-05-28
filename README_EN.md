@@ -74,51 +74,67 @@ configure-fonts(
 
 ### 5. Choose template type
 
-Edit `main.typ` to choose between the **undergraduate thesis** or **programming course design report** template:
-
-#### Undergraduate thesis
+Edit `main.typ` by commenting or uncommenting to choose between the **undergraduate thesis** or **programming course design report** template and add or remove chapter(s) if you need:
 
 ```typst
-#thesis(
-  title: "你的论文题目",
-  title_en: "Your English Title",  // foreign title (optional)
-  author: "你的姓名",
-  student_id: "你的学号",
-  advisor: "指导教师",
-  major: "你的专业",
-  school: "你的学院",
-  class_info: "年级班别，如 2022级 1班",
-  abstract_cn: [中文摘要内容...],
-  keywords_cn: ("关键词1", "关键词2"),
-  abstract_en: [English abstract...],  // optional
-  keywords_en: ("keyword1", "keyword2"), // optional
-  header_text: "页眉显示的文字（可为空，默认使用论文题目）"
-)[
+// ========== select templete type ==========
+// uncommenting the templete you want to use
+
+// Undergraduate thesis
+#thesis(metadata, show_cover: true)[
   #include "chapters/1-introduction.typ"
-  // ... other chapters
+  #include "chapters/2-related.typ"
+  #include "chapters/3-method.typ"
+  #include "chapters/4-experiment.typ"
+  #include "chapters/5-conclusion.typ"
+  #include "chapters/appendix.typ"
 ]
+
+// Programming course design report
+/*
+#course-report(metadata)[
+  #include "chapters/1-introduction.typ"
+  #include "chapters/2-related.typ"
+  #include "chapters/3-method.typ"
+  #include "chapters/4-experiment.typ"
+  #include "chapters/5-conclusion.typ"
+]
+*/
 ```
 
-#### Programming course design report
+### 6. fill in basic info
+
+Edit `metadata/common.typ`:
 
 ```typst
-#course-report(
-  title: "课程设计题目",
-  author: "你的姓名",
-  student_id: "你的学号",
-  advisor: "指导教师",
-  major: "你的专业",
-  school: "你的学院",
-  class_info: "年级班别",
-  grade: "",  // grade (optional, after defense)
-  header_text: "页眉显示的文字（可为空，默认使用题目）"
-)[
-  #include "chapters/1-introduction.typ"
-  // ... other chapters
-]
+#let metadata = (
+  // ========== basic ==========
+  title: "你的论文题目",           // 题目/课程设计题目
+  title_en: "Your English Title", // 外文题目（仅论文需要）
+  author: "姓名",                 // 作者姓名
+  student_id: "学号",             // 学号
+  advisor: "指导教师",            // 指导教师
+  major: "专业",                  // 专业名称
+  school: "学院",                 // 学院名称
+  class_info: "20XX级 X班",       // 年级班别
+  date: datetime.today(),
+
+  // ========== 论文专用 ==========
+  abstract_cn: [中文摘要内容...],     // 中文摘要
+  keywords_cn: ("关键词1", "关键词2"),     // 中文关键词
+  abstract_en: [English abstract...],     // 英文摘要（可选）
+  keywords_en: ("keyword1", "keyword2"),     // 英文关键词（可选）
+
+  // ========== 课程设计专用 ==========
+  grade: "",           // 成绩（答辩后填写，可选）
+
+  // ========== 通用 ==========
+  header_text: none    // 页眉文字（默认使用题目）
+  // 如果需要在页眉显示指定文字，请把上一行的 none 替换为 "页眉显示的文字"，即： header_text: "页眉显示的文字"
+)
 ```
 
-### 6. Write chapter content
+### 7. Write chapter content
 
 Write each chapter under `chapters/` using standard Typst syntax. Common commands:
 
@@ -130,7 +146,7 @@ Write each chapter under `chapters/` using standard Typst syntax. Common command
 - Formula: `$E = mc^2$`
 - Citation: `#cite(...)` (requires a bibliography setup)
 
-### 7. Compile
+### 8. Compile
 
 ```bash
 typst compile main.typ

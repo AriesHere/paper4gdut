@@ -74,51 +74,67 @@ configure-fonts(
 
 ### 5. 选择模板类型
 
-编辑 `main.typ`，选择使用 **本科毕业设计（论文）** 或 **程序设计课程设计报告** 模板：
-
-#### 本科毕业设计（论文）
+编辑 `main.typ`，通过注释与取消注释选择以 **本科毕业设计（论文）** 或 **程序设计课程设计报告** 模板并根据需要增删章节：
 
 ```typst
-#thesis(
-  title: "你的论文题目",
-  title_en: "Your English Title",  // 外文题目（可选）
-  author: "你的姓名",
-  student_id: "你的学号",
-  advisor: "指导教师",
-  major: "你的专业",
-  school: "你的学院",
-  class_info: "年级班别，如 2022级 1班",
-  abstract_cn: [中文摘要内容...],
-  keywords_cn: ("关键词1", "关键词2"),
-  abstract_en: [English abstract...],  // 可选
-  keywords_en: ("keyword1", "keyword2"), // 可选
-  header_text: "页眉显示的文字（可为空，默认使用论文题目）"
-)[
+// ========== 选择文档类型 ==========
+// 取注释需要使用的模板
+
+// 本科毕业设计（论文）
+#thesis(metadata, show_cover: true)[
   #include "chapters/1-introduction.typ"
-  // ... 其他章节
+  #include "chapters/2-related.typ"
+  #include "chapters/3-method.typ"
+  #include "chapters/4-experiment.typ"
+  #include "chapters/5-conclusion.typ"
+  #include "chapters/appendix.typ"
 ]
+
+// 程序设计课程设计报告
+/*
+#course-report(metadata)[
+  #include "chapters/1-introduction.typ"
+  #include "chapters/2-related.typ"
+  #include "chapters/3-method.typ"
+  #include "chapters/4-experiment.typ"
+  #include "chapters/5-conclusion.typ"
+]
+*/
 ```
 
-#### 程序设计课程设计报告
+### 6. 填写基本信息
+
+编辑 `metadata` 目录下的 `common.typ` 文件：
 
 ```typst
-#course-report(
-  title: "课程设计题目",
-  author: "你的姓名",
-  student_id: "你的学号",
-  advisor: "指导教师",
-  major: "你的专业",
-  school: "你的学院",
-  class_info: "年级班别",
-  grade: "",  // 成绩（答辩后填写，可选）
-  header_text: "页眉显示的文字（可为空，默认使用题目）"
-)[
-  #include "chapters/1-introduction.typ"
-  // ... 其他章节
-]
+#let metadata = (
+  // ========== 基本信息 ==========
+  title: "你的论文题目",           // 题目/课程设计题目
+  title_en: "Your English Title", // 外文题目（仅论文需要）
+  author: "姓名",                 // 作者姓名
+  student_id: "学号",             // 学号
+  advisor: "指导教师",            // 指导教师
+  major: "专业",                  // 专业名称
+  school: "学院",                 // 学院名称
+  class_info: "20XX级 X班",       // 年级班别
+  date: datetime.today(),
+
+  // ========== 论文专用 ==========
+  abstract_cn: [中文摘要内容...],     // 中文摘要
+  keywords_cn: ("关键词1", "关键词2"),     // 中文关键词
+  abstract_en: [English abstract...],     // 英文摘要（可选）
+  keywords_en: ("keyword1", "keyword2"),     // 英文关键词（可选）
+
+  // ========== 课程设计专用 ==========
+  grade: "",           // 成绩（答辩后填写，可选）
+
+  // ========== 通用 ==========
+  header_text: none    // 页眉文字（默认使用题目）
+  // 如果需要在页眉显示指定文字，请把上一行的 none 替换为 "页眉显示的文字"，即： header_text: "页眉显示的文字"
+)
 ```
 
-### 6. 编写章节内容
+### 7. 编写章节内容
 
 在 `chapters/` 目录下编写各章节内容，使用标准的 Typst 语法。常用的命令：
 
@@ -130,7 +146,7 @@ configure-fonts(
 - 公式：`$E = mc^2$`
 - 引用：`#cite(...)`（需另外配置参考文献系统）
 
-### 7. 编译
+### 8. 编译
 
 ```bash
 typst compile main.typ
