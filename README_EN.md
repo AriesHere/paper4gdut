@@ -77,8 +77,8 @@ configure-fonts(
 Edit `main.typ` by commenting or uncommenting to choose between the **undergraduate thesis** or **programming course design report** template and add or remove chapter(s) if you need:
 
 ```typst
-// ========== select templete type ==========
-// uncommenting the templete you want to use
+// ========== select template type ==========
+// uncommenting the template you want to use
 
 // Undergraduate thesis
 #thesis(metadata, show_cover: true)[
