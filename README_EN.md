@@ -102,7 +102,7 @@ Edit `main.typ` by commenting or uncommenting to choose between the **undergradu
 */
 ```
 
-### 6. fill in basic info
+### 6. Fill in basic info
 
 Edit `metadata/common.typ`:
 
