@@ -109,28 +109,28 @@ Edit `metadata/common.typ`:
 ```typst
 #let metadata = (
   // ========== basic ==========
-  title: "你的论文题目",           // 题目/课程设计题目
-  title_en: "Your English Title", // 外文题目（仅论文需要）
-  author: "姓名",                 // 作者姓名
-  student_id: "学号",             // 学号
-  advisor: "指导教师",            // 指导教师
-  major: "专业",                  // 专业名称
-  school: "学院",                 // 学院名称
-  class_info: "20XX级 X班",       // 年级班别
+  title: "This is your title",    // Title / Course Design Title
+  title_en: "Your English Title", // English Title (only needed for thesis)
+  author: "Your name",
+  student_id: "Your student ID",
+  advisor: "Your Advisor",
+  major: "Your major",
+  school: "Name of your college",
+  class_info: "Grade and class",  // e.g. 20XX级 X班
   date: datetime.today(),
 
-  // ========== 论文专用 ==========
-  abstract_cn: [中文摘要内容...],     // 中文摘要
-  keywords_cn: ("关键词1", "关键词2"),     // 中文关键词
-  abstract_en: [English abstract...],     // 英文摘要（可选）
-  keywords_en: ("keyword1", "keyword2"),     // 英文关键词（可选）
+  // ========== thesis only ==========
+  abstract_cn: [Chinese abstract...],
+  keywords_cn: ("keyword1", "keyword2"),
+  abstract_en: [English abstract...], // optional
+  keywords_en: ("keyword1", "keyword2"), // optional
 
-  // ========== 课程设计专用 ==========
-  grade: "",           // 成绩（答辩后填写，可选）
+  // ========== course design only ==========
+  grade: "",           // (optional, fill in after defense)
 
-  // ========== 通用 ==========
-  header_text: none    // 页眉文字（默认使用题目）
-  // 如果需要在页眉显示指定文字，请把上一行的 none 替换为 "页眉显示的文字"，即： header_text: "页眉显示的文字"
+  // ========== General ==========
+  header_text: none                 // Header text (defaults to title)
+  // If you need to display specific text in the header, replace none on the line above with "Header Text", i.e.: header_text: "Header Text"
 )
 ```
 
@@ -138,10 +138,10 @@ Edit `metadata/common.typ`:
 
 Write each chapter under `chapters/` using standard Typst syntax. Common commands:
 
-- Level-1 heading: `= 引言`
-- Level-2 heading: `== 研究背景`
-- Level-3 heading: `=== 国内外研究`
-- Image: `#figure(image("path.jpg"), caption: [图片说明])`
+- Level-1 heading: `= Introduction`
+- Level-2 heading: `== Research Background`
+- Level-3 heading: `=== Domestic and international research`
+- Image: `#figure(image("path.jpg"), caption: [Description])`
 - Table: use the `table` function
 - Formula: `$E = mc^2$`
 - Citation: `#cite(...)` (requires a bibliography setup)
